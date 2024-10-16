@@ -51,8 +51,13 @@
 	};
   };
   
-  programs.fish.enable = true;
-  
+  programs.fish = {
+  enable = true;
+  interactiveShellInit = ''
+    ${pkgs.neofetch}/bin/neofetch
+  '';
+  };
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];

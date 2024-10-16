@@ -22,19 +22,8 @@
 
   time.timeZone = "Europe/Amsterdam";
   
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.erwin = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
-    openssh.authorizedKeys.keys = [
-	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEXGrUwai6ZD75n5rPTl06f0gEMtzJU0W8xFnR9YPghE"
-	];
-    initialPassword = "password";
-    packages = with pkgs; [];
-  };
-
   nixpkgs.config.allowUnfree = true;
-
+  
   # List packages installed in system profile. To search, run:
   # $ nix search wget
    environment.systemPackages = with pkgs; [

@@ -15,15 +15,15 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "sandbox"; # Define your hostname.
- 
+
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   time.timeZone = "Europe/Amsterdam";
-  
+
   nixpkgs.config.allowUnfree = true;
-  
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -42,7 +42,7 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  services.openssh = { 
+  services.openssh = {
 	enable = true;
 	allowSFTP = true;
 	settings = {
@@ -50,13 +50,17 @@
 		PasswordAuthentication = false;
 	};
   };
-  
+
   programs.fish = {
-  enable = true;
-  interactiveShellInit = ''
-    ${pkgs.neofetch}/bin/neofetch
-  '';
+   enable = true;
   };
+  # interactiveShellInit = ''
+  #   ${pkgs.neofetch}/bin/neofetch
+  # '';
+  # };
+
+  programs.nix-ld.enable = true;
+
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -81,4 +85,3 @@
   system.stateVersion = "24.05"; # Did you read the comment?
 
 }
-

@@ -1,32 +1,28 @@
-{
-  config,
-  lib,
-  ...
-}:
+{ config, pkgs, lib, ... }:
 with lib; let
   cfg = config.features.cli.fish;
-in {
-  options.features.cli.fish.enable = mkEnableOption "enable extended fish configuration";
+  in {
+      options.features.cli.fish.enable = mkEnableOption "Enable extended fish configuration";
 
-  config = mkIf cfg.enable {
-    programs.fish = {
-      enable = true;
-      loginShellInit = ''
-        set -x NIX_PATH nixpkgs=channel:nixos-unstable
-        set -x NIX_LOG info
-        set -x TERMINAL kitty
+      config = mkIf cfg.enable {
+        programs.fish = {
+          enable = true;
+          loginShellInit = ''
+          set -x NIX_PATH nixpkgs=channel:nixos-unstable
+          set -x NIX_LOG info
 
-        if test (tty) = "/dev/tty1"
-          exec Hyprland &> /dev/null
-        end
-      '';
-      shellAbbrs = {
-        ".." = "cd ..";
-        "..." = "cd ../..";
-        ls = "eza";
-        grep = "rg";
-        ps = "procs";
+          '';
+           interactiveShellInit = ''
+           ${pkgs.neofetch}/bin/neofetch
+           '';
+          shellAbbrs = {
+            ".." = "cd ..";
+            "..." = "cd ../..";
+            ls = "eza";
+            grep = "rg";
+            ps = "procs";
+
+          };
+        };
       };
-    };
-  };
-}
+  }

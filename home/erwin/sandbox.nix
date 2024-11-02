@@ -11,5 +11,8 @@
       fzf.enable = true;
       neofetch.enable = true;
     };
+    desktop = {
+      fonts.enable = true;
+    };
   };
 }

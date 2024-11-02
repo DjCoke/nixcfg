@@ -26,6 +26,6 @@
     packages = [inputs.home-manager.packages.${pkgs.system}.default];
   };
   home-manager.users.erwin =
-    import erwin/${config.networking.hostName}.nix;
+    import ../../../home/erwin/${config.networking.hostName}.nix;
 }
 

@@ -29,7 +29,7 @@
   nix = {
     package = lib.mkDefault pkgs.nix;
     settings = {
-      experimental-features = [ "nix-command" "flakes" "repl-flakes" ]; #removed repl-flakes
+      experimental-features = [ "nix-command" "flakes" ]; #removed repl-flakes
       warn-dirty = false;
     };
   };

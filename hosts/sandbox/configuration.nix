@@ -29,6 +29,8 @@
   environment.systemPackages = with pkgs; [
 	  git
 	  neovim
+	  gnumake #Toegoevoegd voor neovim
+	  gcc #toegevoegd voor neovim
     ];
 
   # Some programs need SUID wrappers, can be configured further or are

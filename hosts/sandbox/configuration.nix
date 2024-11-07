@@ -31,6 +31,9 @@
 	  neovim
 	  gnumake #Toegoevoegd voor neovim
 	  gcc #toegevoegd voor neovim
+    unzip
+    go
+    nodejs
     ];
 
   # Some programs need SUID wrappers, can be configured further or are

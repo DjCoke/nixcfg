@@ -76,7 +76,7 @@
                   system = "aarch64-darwin";
                   config.allowUnfree = true;
                 };
-                # inherit pwnvim;
+                inputs = inputs; # Geef inputs expliciet door aan home.nix
               };
             };
           }

@@ -16,6 +16,7 @@
     gitAndTools.gitFull
     mg
     lazygit
+    nodejs
   ];
 
   homebrew = {

@@ -31,7 +31,6 @@
 
       "the-unarchiver"
       "raycast"
-      "amethyst"
       "discord"
       "loom"
       "notion"

@@ -53,8 +53,8 @@
     , homebrew-core
     , homebrew-cask
     , homebrew-bundle
-    , # pwnvim,
-      ...
+    , dotfiles
+    , ...
     } @ inputs: {
       # Build darwin flake using:
       # $ darwin-rebuild build --flake .#MacBook-Pro

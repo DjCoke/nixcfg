@@ -1,7 +1,7 @@
 { lib
 , pkgs
-, #  pwnvim,
-  ...
+, inputs
+, ...
 }: {
   # Configuration Home Manager
 

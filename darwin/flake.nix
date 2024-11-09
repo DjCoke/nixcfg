@@ -69,7 +69,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              extraSpecialArgs = { inherit inputs outputs; };
+              extraSpecialArgs = { inputs = inputs; outputs = self.outputs; };
               users.erwinvandeglind = import ./home.nix {
                 lib = (import nixpkgs { system = "aarch64-darwin"; }).lib;
                 pkgs = import nixpkgs {

@@ -37,8 +37,6 @@
       flake = false;
     };
 
-    # tricked out nvim from
-    # pwnvim.url = "github:zmre/pwnvim";
   };
 
   outputs =
@@ -66,7 +64,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.erwin = import ./home.nix {
+              users.erwinvandeglind = import ./home.nix {
                 lib = (import nixpkgs { system = "aarch64-darwin"; }).lib;
                 pkgs = import nixpkgs {
                   system = "aarch64-darwin";

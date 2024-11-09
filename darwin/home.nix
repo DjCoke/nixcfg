@@ -7,12 +7,18 @@
 
   home = {
     stateVersion = "24.05";
-    packages = [
-      pkgs.ripgrep
-      pkgs.fd
-      pkgs.curl
-      pkgs.less
-      #     pwnvim.packages."aarch64-darwin".default
+    packages = with pkgs; [
+      ripgrep
+      fd
+      curl
+      less
+      coreutils
+      htop
+      httpie
+      jq
+      procs
+      tldr
+      zip
     ];
     sessionVariables = {
       PAGER = "less";
@@ -96,11 +102,46 @@
     # Configuration of the Fuzzy Finder
     fzf = {
       enable = true;
+      enableFishIntegration = true;
+      enableZshIntegration = true;
+      enableBashIntegration = true;
+
+      colors = {
+        "fg" = "#f8f8f2";
+        "bg" = "#282a36";
+        "hl" = "#bd93f9";
+        "fg+" = "#f8f8f2";
+        "bg+" = "#44475a";
+        "hl+" = "#bd93f9";
+        "info" = "#ffb86c";
+        "prompt" = "#50fa7b";
+        "pointer" = "#ff79c6";
+        "marker" = "#ff79c6";
+        "spinner" = "#ffb86c";
+        "header" = "#6272a4";
+      };
+      defaultOptions = [
+        "--preview='bat --color=always -n {}'"
+        "--bind 'ctrl-/:toggle-preview'"
+      ];
+      defaultCommand = "fd --type f --exclude .git --follow --hidden";
+      changeDirWidgetCommand = "fd --type d --exclude .git --follow --hidden";
+    };
+
+    zoxide = {
+      enable = true;
+      enableFishIntegration = true;
       enableZshIntegration = true;
     };
 
     # Configuration of exa which is a ls replacement
-    eza.enable = true;
+    eza = {
+      enable = true;
+      enableFishIntegration = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+      extraOptions = [ "-l" "--icons" "--git" "-a" ];
+    };
 
     # Configutation of zsh
     zsh = {

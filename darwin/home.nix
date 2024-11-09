@@ -1,8 +1,4 @@
-{ lib
-, pkgs
-, inputs
-, ...
-}: {
+{ lib, pkgs, ... }: {
   # Configuration Home Manager
 
   home = {

@@ -37,6 +37,11 @@
       flake = false;
     };
 
+    dotfiles = {
+      url = "git+https://github.com/DjCoke/dotfiles.git";
+      flake = false;
+    };
+
   };
 
   outputs =

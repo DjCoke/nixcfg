@@ -25,6 +25,11 @@
       CLICLOLOR = 1;
       EDITOR = "nvim";
     };
+    file.".config/nvim" = {
+      source = "${inputs.dotfiles}/nvim";
+      recursive = true;
+    };
+
   };
 
   # Configuration of all our programs via Home Manager
@@ -149,7 +154,7 @@
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
-      shellAliases = { ls = "ls --color=auto -F"; };
+      #   shellAliases = { ls = "ls --color=auto -F"; };
       history.size = 10000;
       history.share = true;
     };

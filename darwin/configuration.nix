@@ -10,6 +10,7 @@
     tmux
     coreutils
     mkalias
+    neovim
     alacritty
     curl
     gitAndTools.gitFull

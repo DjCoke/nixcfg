@@ -22,7 +22,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Manages the homebrew package system
-    nix-homebrew = {url = "github:zhaofengli-wip/nix-homebrew";};
+    nix-homebrew = { url = "github:zhaofengli-wip/nix-homebrew"; };
 
     homebrew-core = {
       url = "github:homebrew/homebrew-core";
@@ -38,65 +38,65 @@
     };
 
     # tricked out nvim from
-    pwnvim.url = "github:zmre/pwnvim";
+    # pwnvim.url = "github:zmre/pwnvim";
   };
 
-  outputs = {
-    self,
-    nix-darwin,
-    nixpkgs,
-    home-manager,
-    nix-homebrew,
-    homebrew-core,
-    homebrew-cask,
-    homebrew-bundle,
-    pwnvim,
-    ...
-  } @ inputs: {
-    # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#MacBook-Pro
-    darwinConfigurations."MacBook-Pro" = nix-darwin.lib.darwinSystem {
-      system = "aarch64-darwin";
-      # Definieer pkgs door nixpkgs te importeren voor aarch64-darwin (Apple Silicon)
-      modules = [
-        ./configuration.nix
-        home-manager.darwinModules.home-manager
-        {
-          # `home-manager` config
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            users.erwin = import ./home.nix {
-              lib = (import nixpkgs {system = "aarch64-darwin";}).lib;
-              pkgs = import nixpkgs {
-                system = "aarch64-darwin";
-                config.allowUnfree = true;
+  outputs =
+    { self
+    , nix-darwin
+    , nixpkgs
+    , home-manager
+    , nix-homebrew
+    , homebrew-core
+    , homebrew-cask
+    , homebrew-bundle
+    , # pwnvim,
+      ...
+    } @ inputs: {
+      # Build darwin flake using:
+      # $ darwin-rebuild build --flake .#MacBook-Pro
+      darwinConfigurations."MacBook-Pro" = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        # Definieer pkgs door nixpkgs te importeren voor aarch64-darwin (Apple Silicon)
+        modules = [
+          ./configuration.nix
+          home-manager.darwinModules.home-manager
+          {
+            # `home-manager` config
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.erwin = import ./home.nix {
+                lib = (import nixpkgs { system = "aarch64-darwin"; }).lib;
+                pkgs = import nixpkgs {
+                  system = "aarch64-darwin";
+                  config.allowUnfree = true;
+                };
+                # inherit pwnvim;
               };
-              inherit pwnvim;
             };
-          };
-        }
+          }
 
-        nix-homebrew.darwinModules.nix-homebrew
-        {
-          nix-homebrew = {
-            enable = true;
-            # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
-            enableRosetta = true;
-            user = "erwin";
+          nix-homebrew.darwinModules.nix-homebrew
+          {
+            nix-homebrew = {
+              enable = true;
+              # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
+              enableRosetta = true;
+              user = "erwinvandeglind";
 
-            taps = {
-              "homebrew/homebrew-core" = homebrew-core;
-              "homebrew/homebrew-cask" = homebrew-cask;
-              "homebrew/homebrew-bundle" = homebrew-bundle;
+              taps = {
+                "homebrew/homebrew-core" = homebrew-core;
+                "homebrew/homebrew-cask" = homebrew-cask;
+                "homebrew/homebrew-bundle" = homebrew-bundle;
+              };
+              mutableTaps = false;
             };
-            mutableTaps = false;
-          };
-        }
-      ];
+          }
+        ];
+      };
+
+      # Expose the package set, including overlays, for convenience.
+      darwinPackages = self.darwinConfigurations."MacBook-Pro".pkgs;
     };
-
-    # Expose the package set, including overlays, for convenience.
-    darwinPackages = self.darwinConfigurations."MacBook-Pro".pkgs;
-  };
 }

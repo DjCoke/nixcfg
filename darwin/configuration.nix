@@ -1,8 +1,7 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
+{ config
+, lib
+, pkgs
+, ...
 }: {
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
@@ -60,9 +59,9 @@
   nixpkgs.config.allowUnfreePredicate = _: true;
 
   # Installing my favorite fonts system-wide
-  fonts.packages = [(pkgs.nerdfonts.override {fonts = ["JetBrainsMono" "Meslo"];})];
+  fonts.packages = [ (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" "Meslo" ]; }) ];
 
-  users.users.erwin.home = "/Users/erwin";
+  users.users.erwinvandeglind.home = "/Users/erwinvandeglind";
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
   # nix.package = pkgs.nix;
@@ -83,10 +82,10 @@
 
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true; # default shell on catalina
-  environment.shells = [pkgs.bash pkgs.zsh];
+  environment.shells = [ pkgs.bash pkgs.zsh ];
   environment.loginShell = pkgs.zsh;
-  environment.systemPath = ["/opt/homebrew/bin"];
-  environment.pathsToLink = ["/Applications"];
+  environment.systemPath = [ "/opt/homebrew/bin" ];
+  environment.pathsToLink = [ "/Applications" ];
   # programs.fish.enable = true;
 
   system.keyboard.enableKeyMapping = true;
@@ -126,13 +125,14 @@
   system.defaults.NSGlobalDomain.InitialKeyRepeat = 14;
   system.defaults.NSGlobalDomain.KeyRepeat = 1;
 
-  system.activationScripts.applications.text = let
-    env = pkgs.buildEnv {
-      name = "system-applications";
-      paths = config.environment.systemPackages;
-      pathsToLink = "/Applications";
-    };
-  in
+  system.activationScripts.applications.text =
+    let
+      env = pkgs.buildEnv {
+        name = "system-applications";
+        paths = config.environment.systemPackages;
+        pathsToLink = "/Applications";
+      };
+    in
     pkgs.lib.mkForce ''
       # Set up applications.
       echo "setting up /Applications..." >&2

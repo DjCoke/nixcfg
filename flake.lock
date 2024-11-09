@@ -3,11 +3,11 @@
     "dotfiles": {
       "flake": false,
       "locked": {
-        "lastModified": 1731022180,
-        "narHash": "sha256-JV+fYPaf2BF+ssCXa/9hI/XfCobxw6328iWFrTw5PAs=",
+        "lastModified": 1731184306,
+        "narHash": "sha256-nDDjLOngMZWlyJf1BnnB8abpQ6yIASuBDTEvJPnbDDc=",
         "ref": "refs/heads/main",
-        "rev": "06fd071ae1575a07bace1497abc53b3bb1cfa5ae",
-        "revCount": 40,
+        "rev": "143c5ea608190b5344eb8654635062cffc059ae9",
+        "revCount": 47,
         "type": "git",
         "url": "https://github.com/DjCoke/dotfiles.git"
       },

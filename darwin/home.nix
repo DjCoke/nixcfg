@@ -1,7 +1,6 @@
-{
-  lib,
-  pkgs,
-  pwnvim,
+{ lib
+, pkgs
+, #  pwnvim,
   ...
 }: {
   # Configuration Home Manager
@@ -13,7 +12,7 @@
       pkgs.fd
       pkgs.curl
       pkgs.less
-      pwnvim.packages."aarch64-darwin".default
+      #     pwnvim.packages."aarch64-darwin".default
     ];
     sessionVariables = {
       PAGER = "less";
@@ -45,13 +44,13 @@
         ms-vscode-remote.remote-ssh
         jnoortheen.nix-ide
       ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-      {
-        name = "beautiful-dracula";
-        publisher = "NguyenHoangLam";
-        version = "0.1.4";
-        sha256 = "H8O6PkpwcPFiRRp17FmM05JtZ5suIJWn+FtGf5YMquU=";
-      }
-    ];
+        {
+          name = "beautiful-dracula";
+          publisher = "NguyenHoangLam";
+          version = "0.1.4";
+          sha256 = "H8O6PkpwcPFiRRp17FmM05JtZ5suIJWn+FtGf5YMquU=";
+        }
+      ];
 
       # User Settings
       # Stolen from https://discourse.nixos.org/t/home-manager-vscode-extension-settings-mutableextensionsdir-false/33878
@@ -109,7 +108,7 @@
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
-      shellAliases = {ls = "ls --color=auto -F";};
+      shellAliases = { ls = "ls --color=auto -F"; };
       history.size = 10000;
       history.share = true;
     };

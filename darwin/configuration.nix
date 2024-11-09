@@ -15,6 +15,7 @@
     curl
     gitAndTools.gitFull
     mg
+    lazygit
   ];
 
   homebrew = {

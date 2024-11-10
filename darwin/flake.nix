@@ -1,4 +1,4 @@
-{ description = "Darwin flake which is basically the same as the flake.nix in root"
+{ description = "Darwin flake which is basically the same as the flake.nix in root";
 
   # Followed the instructions of Dreams of Autonomy, https://youtu.be/Z8BL8mdzWHI?si=K83jL15NjsDWIPti
   # But renamed the inputs to more logical names (see zmre 14:30 minute mark)

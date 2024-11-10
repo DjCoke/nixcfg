@@ -37,5 +37,5 @@
 # networking.hostName = "nixos"; # Define your hostname.
 
 {
-  imports = [ ./configuration.nix ];
+  imports = [ ../common/default-darwin.nix ./configuration.nix ];
 }

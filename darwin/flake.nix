@@ -1,5 +1,4 @@
-{
-  description = "System flake configuration file";
+{ description = "Darwin flake which is basically the same as the flake.nix in root"
 
   # Followed the instructions of Dreams of Autonomy, https://youtu.be/Z8BL8mdzWHI?si=K83jL15NjsDWIPti
   # But renamed the inputs to more logical names (see zmre 14:30 minute mark)
@@ -7,6 +6,10 @@
   # Next we will follow instruction of zmre, https://youtu.be/LE5JR4JcvMg?si=9Bigvv_AAOEBUsoT
   # Vervolgens ben ik ook gaan kijken naar: https://blog.dbalan.in/blog/2024/03/25/boostrap-a-macos-machine-with-nix/index.html
   # Dit betreft in mijn visie een veel duidelijkere flake
+
+  # 10-11-2024 I had a seperate config for my Darwin Flake and one for all my other systems
+  # I wanted to combine the with the same technique, /home for home-manager and hosts for my configuration
+  # Otherwise would be obliged to have two different ways of configuration
 
   inputs = {
     # Where we get most of our Software. Giant mono repo with recipes
@@ -44,8 +47,8 @@
 
   };
 
-  outputs =
-    { self
+  outputs = {
+    self
     , nix-darwin
     , nixpkgs
     , home-manager
@@ -54,53 +57,53 @@
     , homebrew-cask
     , homebrew-bundle
     , dotfiles
-    , ...
-    } @ inputs: {
-      # Build darwin flake using:
-      # $ darwin-rebuild build --flake .#MacBook-Pro
-      darwinConfigurations."MacBook-Pro" = nix-darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        # Definieer pkgs door nixpkgs te importeren voor aarch64-darwin (Apple Silicon)
-        modules = [
-          ./configuration.nix
-          home-manager.darwinModules.home-manager
-          {
-            # `home-manager` config
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              extraSpecialArgs = { inputs = inputs; outputs = self.outputs; };
-              users.erwinvandeglind = import ./home.nix {
-                lib = (import nixpkgs { system = "aarch64-darwin"; }).lib;
-                pkgs = import nixpkgs {
-                  system = "aarch64-darwin";
-                  config.allowUnfree = true;
-                };
-                inputs = inputs; # Geef inputs expliciet door aan home.nix
-              };
-            };
-          }
+    , ...}@inputs:
+    let
+      inherit (self) outputs;
+      systems = [
+        "aarch64-linux"
+        "i686-linux"
+        "x86_64-linux"
+        "aarch64-darwin"
+        "x86_64-darwin"
+      ];
+      forAllSystems = nixpkgs.lib.genAttrs systems;
+    in {
+      packages =
+        forAllSystems (system: import ../pkgs nixpkgs.legacyPackages.${system});
+      overlays = import ../overlays { inherit inputs; };
 
-          nix-homebrew.darwinModules.nix-homebrew
-          {
-            nix-homebrew = {
-              enable = true;
-              # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
-              enableRosetta = true;
-              user = "erwinvandeglind";
-
-              taps = {
-                "homebrew/homebrew-core" = homebrew-core;
-                "homebrew/homebrew-cask" = homebrew-cask;
-                "homebrew/homebrew-bundle" = homebrew-bundle;
-              };
-              mutableTaps = false;
-            };
-          }
-        ];
+      nixosConfigurations = {
+        sandbox = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [ ../hosts/sandbox ];
+        };
       };
 
-      # Expose the package set, including overlays, for convenience.
-      darwinPackages = self.darwinConfigurations."MacBook-Pro".pkgs;
+      darwinConfigurations = {
+        "MacBook-Pro" = nix-darwin.lib.darwinSystem {
+          system = "aarch64-darwin"; # Pas aan als je op een Intel Mac werkt
+          modules = [
+            ../hosts/macbook-pro # Voeg je specifieke macOS-configuratiebestand toe
+          ];
+        };
+      };
+
+      homeConfigurations = {
+        # Linux Home Manager Configuratie
+        "erwin@sandbox" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages."x86_64-linux";
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ../home/erwin/sandbox.nix ];
+        };
+
+        # macOS Home Manager Configuratie voor MacBook-Pro
+        "erwin@MacBook-Pro" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages."aarch64-darwin"; # Of "x86_64-darwin" voor Intel
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ../home/erwin/macbook-pro.nix ];
+        };
+      };
     };
 }
+

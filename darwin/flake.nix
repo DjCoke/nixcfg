@@ -83,8 +83,26 @@
       darwinConfigurations = {
         "MacBook-Pro" = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin"; # Pas aan als je op een Intel Mac werkt
+          specialArgs = { inherit inputs outputs; };
           modules = [
             ../hosts/macbook-pro # Voeg je specifieke macOS-configuratiebestand toe
+          nix-homebrew.darwinModules.nix-homebrew
+          {
+            nix-homebrew = {
+              enable = true;
+              # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
+              enableRosetta = true;
+              user = "erwinvandeglind";
+
+              taps = {
+                "homebrew/homebrew-core" = homebrew-core;
+                "homebrew/homebrew-cask" = homebrew-cask;
+                "homebrew/homebrew-bundle" = homebrew-bundle;
+              };
+              mutableTaps = false;
+            };
+          }
+
           ];
         };
       };

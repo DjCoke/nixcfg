@@ -1,6 +1,7 @@
 {pkgs, ... }: {
 imports = [
   ./fish.nix
+  ./zsh.nix
   ./fzf.nix
   ./neofetch.nix
 ];
@@ -8,11 +9,13 @@ imports = [
 programs.zoxide = {
   enable = true;
   enableFishIntegration = true;
+  enableZshIntegration = true;
 };
 
 programs.eza = {
   enable = true;
   enableFishIntegration = true;
+  enableZshIntegration = true;
   enableBashIntegration = true;
   extraOptions = ["-l" "--icons" "--git" "-a"];
 };
@@ -29,6 +32,9 @@ home.packages = with pkgs; [
   ripgrep
   tldr
   zip
+  curl
+  less
+  coreutils
 ];
 
 }

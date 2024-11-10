@@ -1,6 +1,6 @@
 { config, ... }: { imports = [
     ./home-darwin.nix
-  #   ../features/cli
+   ../features/cli
   #   ../features/desktop
   #   ./dotfiles
      ../common

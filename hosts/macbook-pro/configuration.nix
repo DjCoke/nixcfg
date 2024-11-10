@@ -63,7 +63,7 @@
   # Installing my favorite fonts system-wide
   fonts.packages = [ (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" "Meslo" ]; }) ];
 
-  users.users.erwinvandeglind.home = "/Users/erwinvandeglind";
+  # users.users.erwinvandeglind.home = "/Users/erwinvandeglind";
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
   # nix.package = pkgs.nix;

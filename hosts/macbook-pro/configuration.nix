@@ -59,6 +59,8 @@
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnfreePredicate = _: true;
+  #  programs.nix-ld.enable = true; not available in nix-darwin
+
 
   # Installing my favorite fonts system-wide
   fonts.packages = [ (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" "Meslo" ]; }) ];
@@ -83,9 +85,9 @@
   nix.settings.experimental-features = "nix-command flakes";
 
   # Create /etc/zshrc that loads the nix-darwin environment.
-  programs.zsh.enable = true; # default shell on catalina
-  environment.shells = [ pkgs.bash pkgs.zsh ];
-  environment.loginShell = pkgs.zsh;
+  # programs.zsh.enable = true; # default shell on catalina
+  # environment.shells = [ pkgs.bash pkgs.zsh ];
+  # environment.loginShell = pkgs.zsh;
   environment.systemPath = [ "/opt/homebrew/bin" ];
   environment.pathsToLink = [ "/Applications" ];
   # programs.fish.enable = true;

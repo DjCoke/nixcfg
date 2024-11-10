@@ -5,23 +5,29 @@ with lib; let
       options.features.cli.zsh.enable = mkEnableOption "Enable extended zsh configuration";
 
       config = mkIf cfg.enable {
-        programs.zsh = {
-          enable = true;
-          loginExtra = ''
-          set -x NIX_PATH nixpkgs=channel:nixos-unstable
-          set -x NIX_LOG info
-
-          '';
-          loginExtra = ''
-           ${pkgs.neofetch}/bin/neofetch
-           '';
-          shellAliases = {
+          programs.zsh = {
+            enable = true;
+              # envExtra = ''
+              #    set -x NIX_PATH nixpkgs=channel:nixos-unstable
+              #    set -x NIX_LOG info
+              #
+              #   '';
+            loginExtra = ''
+            # Neofetch wordt uitgevoerd bij het openen van elke nieuwe interactieve shell
+            ${pkgs.neofetch}/bin/neofetch
+            '';
+            shellAliases = {
             ".." = "cd ..";
             "..." = "cd ../..";
             ls = "eza";
             grep = "rg";
             ps = "procs";
+            };
+            enableCompletion = true;
+            autosuggestion.enable = true;
+            syntaxHighlighting.enable = true;
+            history.size = 10000;
+            history.share = true;
           };
-        };
       };
   }

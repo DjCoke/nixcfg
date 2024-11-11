@@ -8,7 +8,7 @@
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = lib.mkDefault "erwinvandeglind";
-  home.homeDirectory = lib.mkDefault "/home/${config.home.username}";
+  home.homeDirectory = lib.mkDefault "/Users/${config.home.username}";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -27,6 +27,7 @@
     # pkgs.hello
     cowsay
     eza
+    zoxide
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the

@@ -6,7 +6,7 @@
      ../common
   ];
 
-   features = {
+  features = {
      cli = {
        zsh.enable = true;
        fzf.enable = true;

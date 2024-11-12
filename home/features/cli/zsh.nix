@@ -7,11 +7,6 @@ with lib; let
       config = mkIf cfg.enable {
           programs.zsh = {
             enable = true;
-              # envExtra = ''
-              #    set -x NIX_PATH nixpkgs=channel:nixos-unstable
-              #    set -x NIX_LOG info
-              #
-              #   '';
             loginExtra = ''
             # Neofetch wordt uitgevoerd bij het openen van elke nieuwe interactieve shell
             ${pkgs.neofetch}/bin/neofetch

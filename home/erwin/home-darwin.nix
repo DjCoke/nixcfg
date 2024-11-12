@@ -26,8 +26,6 @@
     # # "Hello, world!" when run.
     # pkgs.hello
     cowsay
-    eza
-    zoxide
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -75,6 +73,10 @@
   #
   home.sessionVariables = {
     # EDITOR = "emacs";
+    PAGER = "less";
+    CLICLOLOR = 1;
+    EDITOR = "nvim";
+
   };
 
   # Let Home Manager install and manage itself.

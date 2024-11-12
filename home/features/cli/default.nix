@@ -22,6 +22,38 @@ programs.eza = {
 
 programs.bat = {enable = true;};
 
+  #Configuration of Starship
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+    # Configuration of Alacritty
+    programs.alacritty = {
+      enable = true;
+
+      # Settings of Alacritty
+      settings = {
+        font = {
+          normal.family = "MesloLGS Nerd Font Mono";
+          size = 16;
+        };
+
+        window = {
+          opacity = 1.0;
+          padding = {
+            x = 24;
+            y = 24;
+          };
+        };
+      };
+    };
+
+programs.wezterm = {
+    enable = true;
+    enableZshIntegration = true;
+    enableBashIntegration = true;
+};
+
 home.packages = with pkgs; [
   coreutils
   fd
@@ -34,7 +66,15 @@ home.packages = with pkgs; [
   zip
   curl
   less
-  coreutils
+  pet
+  gh
+  kubectl
+  kubectx
+  yq
+  just
+  k9s
+  tree
+  jetbrains-mono
 ];
 
 }

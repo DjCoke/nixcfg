@@ -92,7 +92,7 @@
               enable = true;
               # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
               enableRosetta = true;
-              user = "erwinvandeglind";
+              user = "erwin";
 
               taps = {
                 "homebrew/homebrew-core" = homebrew-core;

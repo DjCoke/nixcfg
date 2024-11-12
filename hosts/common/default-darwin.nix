@@ -3,14 +3,15 @@
 { pkgs, lib, nixpkgs, config, inputs, outputs, ... }: {
   imports = [
     ./users/erwinvandeglind.nix
-  #inputs.home-manager.nixosModules.home-manager
+# TODO: rename erwinvandeglind.nix to erwin?
+# inputs.home-manager.nixosModules.home-manager
   inputs.home-manager.darwinModules.home-manager
   ];
   home-manager = {
   	useUserPackages = true;
     extraSpecialArgs = { inherit inputs outputs; };
     # useGlobalPkgs = true;
-              users.erwinvandeglind = import ../../home/erwin/macbook-pro.nix {
+              users.erwin = import ../../home/erwin/macbook-pro.nix {
                 lib = (import nixpkgs { system = "aarch64-darwin"; }).lib;
                 pkgs = import nixpkgs {
                   system = "aarch64-darwin";
@@ -50,7 +51,6 @@
        experimental-features = "nix-command flakes";
        trusted-users = [
          "root"
-         "erwinvandeglind"
          "erwin"
          "@admin"
        ]; # Set users that are allowed to use the flake command

@@ -11,12 +11,13 @@
     coreutils
     mkalias
     neovim
-    alacritty
     curl
     gitAndTools.gitFull
     mg
     lazygit
     nodejs
+    alacritty
+    wezterm
   ];
 
   homebrew = {
@@ -85,9 +86,9 @@
   nix.settings.experimental-features = "nix-command flakes";
 
   # Create /etc/zshrc that loads the nix-darwin environment.
-  # programs.zsh.enable = true; # default shell on catalina
-  # environment.shells = [ pkgs.bash pkgs.zsh ];
-  # environment.loginShell = pkgs.zsh;
+  programs.zsh.enable = true; # default shell on catalina
+  environment.shells = [ pkgs.bash pkgs.zsh ];
+  environment.loginShell = pkgs.zsh;
   environment.systemPath = [ "/opt/homebrew/bin" ];
   environment.pathsToLink = [ "/Applications" ];
   # programs.fish.enable = true;
@@ -120,6 +121,11 @@
 
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = "aarch64-darwin";
+  
+  # Now, we can build and run binaries for both CPUs 
+  nix.extraOptions = ''
+        extra-platforms = x86_64-darwin aarch64-darwin
+      '';
 
   # Apple System configurations system-wide
   system.defaults.finder.AppleShowAllExtensions = true;
@@ -128,6 +134,12 @@
   system.defaults.NSGlobalDomain.AppleShowAllExtensions = true;
   system.defaults.NSGlobalDomain.InitialKeyRepeat = 14;
   system.defaults.NSGlobalDomain.KeyRepeat = 1;
+
+  security.pam.enableSudoTouchIdAuth = true;
+  system.defaults.dock.mru-spaces = false;
+  system.defaults.finder.FXPreferredViewStyle = "Nlsv";
+  system.defaults.screencapture.location = "~/Pictures/screenshots";
+
 
   system.activationScripts.applications.text =
     let

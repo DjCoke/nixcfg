@@ -1,6 +1,6 @@
 { config, lib, ... }:
 with lib; let
-  cfg = config.features.starship.fzf;
+  cfg = config.features.cli.starship;
 in
 {
   options.features.cli.starship.enable = mkEnableOption "Enable Starship prompt";

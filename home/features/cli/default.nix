@@ -4,6 +4,7 @@
     ./zsh.nix
     ./fzf.nix
     ./git.nix
+    ./starship.nix
     ./neofetch.nix
   ];
 
@@ -22,12 +23,6 @@
   };
 
   programs.bat = { enable = true; };
-
-  #Configuration of Starship
-  programs.starship = {
-    enable = true;
-    enableZshIntegration = true;
-  };
 
   home.packages = with pkgs; [
     coreutils

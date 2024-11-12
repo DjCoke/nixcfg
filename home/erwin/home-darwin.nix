@@ -7,7 +7,7 @@
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = lib.mkDefault "erwinvandeglind";
+  home.username = lib.mkDefault "erwin";
   home.homeDirectory = lib.mkDefault "/Users/${config.home.username}";
 
   # This value determines the Home Manager release that your configuration is

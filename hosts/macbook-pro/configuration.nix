@@ -18,6 +18,7 @@
     nodejs
     alacritty
     wezterm
+    cargo
   ];
 
   homebrew = {
@@ -88,7 +89,6 @@
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true; # default shell on catalina
   environment.shells = [ pkgs.bash pkgs.zsh ];
-  environment.loginShell = pkgs.zsh;
   environment.systemPath = [ "/opt/homebrew/bin" ];
   environment.pathsToLink = [ "/Applications" ];
   # programs.fish.enable = true;
@@ -121,11 +121,11 @@
 
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = "aarch64-darwin";
-  
+
   # Now, we can build and run binaries for both CPUs 
   nix.extraOptions = ''
-        extra-platforms = x86_64-darwin aarch64-darwin
-      '';
+    extra-platforms = x86_64-darwin aarch64-darwin
+  '';
 
   # Apple System configurations system-wide
   system.defaults.finder.AppleShowAllExtensions = true;
@@ -155,7 +155,7 @@
       rm -rf /Applications/Nix\ Apps
       mkdir -p /Applications/Nix\ Apps
       find ${env}/Applications -maxdepth 1 -type l -exec readlink '{}' + |
-      while read src; do
+      while read -r src; do
         app_name=$(basename "$src")
         echo "copying $src" >&2
         ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"

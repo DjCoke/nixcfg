@@ -3,17 +3,9 @@
     ./fish.nix
     ./zsh.nix
     ./fzf.nix
+    ./git.nix
     ./neofetch.nix
   ];
-
-  # Configuration of git
-  programs.git = {
-    enable = true;
-    userName = "DjCoke";
-    userEmail = "erwin.vd.glind@me.com";
-  };
-
-
 
   programs.zoxide = {
     enable = true;
@@ -35,12 +27,6 @@
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
-  };
-
-  programs.wezterm = {
-    enable = true;
-    enableZshIntegration = true;
-    enableBashIntegration = true;
   };
 
   home.packages = with pkgs; [

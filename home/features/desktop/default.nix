@@ -2,6 +2,7 @@
   imports = [
     ./fonts.nix
     ./alacritty.nix
+    ./wezterm.nix
     #./hyprland.nix
     #./wayland.nix
   ];

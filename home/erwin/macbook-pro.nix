@@ -1,4 +1,5 @@
-{ config, ... }: { imports = [
+{ config, ... }: {
+  imports = [
     ./home-darwin.nix
     ../features/cli
     ../features/desktop
@@ -7,13 +8,16 @@
   ];
 
   features = {
-     cli = {
-       zsh.enable = true;
-       fzf.enable = true;
-       neofetch.enable = true;
-     };
-     desktop = {
-       fonts.enable = true;
-     };
+    cli = {
+      zsh.enable = true;
+      fzf.enable = true;
+      neofetch.enable = true;
+      git.enable = true;
+    };
+    desktop = {
+      alacritty.enable = true;
+      wezterm.enable = true;
+      fonts.enable = true;
+    };
   };
 }

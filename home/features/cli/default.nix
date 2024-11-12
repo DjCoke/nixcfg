@@ -6,6 +6,15 @@ imports = [
   ./neofetch.nix
 ];
 
+# Configuration of git
+programs.git = {
+      enable = true;
+      userName = "DjCoke";
+      userEmail = "erwin.vd.glind@me.com";
+};
+
+
+
 programs.zoxide = {
   enable = true;
   enableFishIntegration = true;

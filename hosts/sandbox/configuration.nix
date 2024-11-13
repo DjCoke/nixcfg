@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
@@ -27,17 +28,17 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-	  git
-	  neovim
-	  gnumake #Toegoevoegd voor neovim
-	  gcc #toegevoegd voor neovim
+    git
+    neovim
+    gnumake #Toegoevoegd voor neovim
+    gcc #toegevoegd voor neovim
     unzip
     go
     nodejs
     cargo
     python3
     lazygit
-    ];
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -51,21 +52,14 @@
 
   # Enable the OpenSSH daemon.
   services.openssh = {
-	enable = true;
-	allowSFTP = true;
-	settings = {
-		PermitRootLogin = "no";
-		PasswordAuthentication = false;
-	};
+    enable = true;
+    allowSFTP = true;
+    settings = {
+      PermitRootLogin = "no";
+      PasswordAuthentication = false;
+    };
   };
 
-  programs.fish = {
-   enable = true;
-  };
-  # interactiveShellInit = ''
-  #   ${pkgs.neofetch}/bin/neofetch
-  # '';
-  # };
 
   programs.nix-ld.enable = true;
 

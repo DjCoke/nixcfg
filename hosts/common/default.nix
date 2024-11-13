@@ -1,13 +1,13 @@
 # Common configuration for all hosts
 
 { pkgs, lib, inputs, outputs, ... }: {
- imports = [
- 	./users
-	inputs.home-manager.nixosModules.home-manager
- ];
+  imports = [
+    ./users
+    inputs.home-manager.nixosModules.home-manager
+  ];
   home-manager = {
-  	useUserPackages = true;
-	  extraSpecialArgs = {inherit inputs outputs;};
+    useUserPackages = true;
+    extraSpecialArgs = { inherit inputs outputs; };
   };
   nixpkgs = {
     # You can add overlays here
@@ -51,5 +51,10 @@
       ((lib.filterAttrs (_: lib.isType "flake")) inputs);
     nixPath = [ "/etc/nix/path" ];
   };
-  users.defaultUserShell = pkgs.fish;
+  # Fallback
+  programs.zsh = {
+    enable = true;
+  };
+
+  users.defaultUserShell = pkgs.zsh;
 }

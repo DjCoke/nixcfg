@@ -1,4 +1,5 @@
-{ config, ... }: { imports = [
+{ config, ... }: {
+  imports = [
     ./home.nix
     ../features/cli
     ../features/desktop
@@ -8,8 +9,11 @@
 
   features = {
     cli = {
-      fish.enable = true;
+      zsh.enable = true;
+      fish.enable = false;
+      starship.enable = true;
       fzf.enable = true;
+      git.enable = true;
       neofetch.enable = true;
     };
     desktop = {

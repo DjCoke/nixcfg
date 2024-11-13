@@ -18,6 +18,7 @@
     desktop = {
       alacritty.enable = true;
       wezterm.enable = true;
+      aerospace.enable = true;
       fonts.enable = true;
     };
   };

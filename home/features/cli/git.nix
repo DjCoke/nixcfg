@@ -9,7 +9,7 @@ in
     programs.git = {
       enable = true;
       userName = "DjCoke";
-      userEmail = "erwin.vd.glind@me.com";
+      userEmail = "8378780+DjCoke@users.noreply.github.com";
 
     };
   };

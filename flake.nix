@@ -29,19 +29,19 @@
     # Manages the homebrew package system
     nix-homebrew = { url = "github:zhaofengli-wip/nix-homebrew"; };
 
-    homebrew-core = {
-      url = "github:homebrew/homebrew-core";
-      flake = false;
-    };
-    homebrew-cask = {
-      url = "github:homebrew/homebrew-cask";
-      flake = false;
-    };
-    homebrew-bundle = {
-      url = "github:homebrew/homebrew-bundle";
-      flake = false;
-    };
-
+    # homebrew-core = {
+    #   url = "github:homebrew/homebrew-core";
+    #   flake = false;
+    # };
+    # homebrew-cask = {
+    #   url = "github:homebrew/homebrew-cask";
+    #   flake = false;
+    # };
+    # homebrew-bundle = {
+    #   url = "github:homebrew/homebrew-bundle";
+    #   flake = false;
+    # };
+    #
     dotfiles = {
       url = "git+https://github.com/DjCoke/dotfiles.git";
       flake = false;
@@ -55,9 +55,9 @@
     , nixpkgs
     , home-manager
     , nix-homebrew
-    , homebrew-core
-    , homebrew-cask
-    , homebrew-bundle
+      # , homebrew-core
+      # , homebrew-cask
+      # , homebrew-bundle
     , dotfiles
     , ...
     }@inputs:
@@ -94,16 +94,16 @@
             {
               nix-homebrew = {
                 enable = true;
-                # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
+                #     # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
                 enableRosetta = true;
                 user = "erwin";
-
-                taps = {
-                  "homebrew/homebrew-core" = homebrew-core;
-                  "homebrew/homebrew-cask" = homebrew-cask;
-                  "homebrew/homebrew-bundle" = homebrew-bundle;
-                };
-                mutableTaps = false;
+                #
+                #     taps = {
+                #       "homebrew/homebrew-core" = homebrew-core;
+                #       "homebrew/homebrew-cask" = homebrew-cask;
+                #       "homebrew/homebrew-bundle" = homebrew-bundle;
+                #     };
+                #     mutableTaps = false;
               };
             }
 

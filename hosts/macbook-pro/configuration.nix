@@ -1,6 +1,7 @@
 { config
 , lib
 , pkgs
+, outputs
 , ...
 }: {
   # List packages installed in system profile. To search by name, run:
@@ -18,16 +19,24 @@
     nodejs
     alacritty
     wezterm
+    sops
     cargo
+    age
   ];
 
   homebrew = {
     enable = true;
-    global.autoUpdate = false;
-    caskArgs.no_quarantine = true;
-    global.brewfile = true;
-    brews = [
-      "mas"
+    # enableRosetta = true;
+    # user = "erwin";
+    # autoMigrate = true;
+    # global.autoUpdate = false;
+    # caskArgs.no_quarantine = true;
+    # global.brewfile = true;
+    #brews = [
+    #  "mas"
+    #];
+    taps = [
+      "nikitabobko/tap"
     ];
     casks = [
       # Browsers
@@ -37,25 +46,28 @@
       "the-unarchiver"
       "raycast"
       "discord"
-      "loom"
-      "notion"
+      # "loom"
+      # "notion"
       "slack"
-      "telegram"
-      "zoom"
-      "syncthing"
+      # "telegram"
+      # "zoom"
+      # "syncthing"
 
+      # Window Manager
+      "aerospace"
+      #
       # Entertainment Tools
-      "steam"
-      "vlc"
+      # "steam"
+      # "vlc"
     ];
-    masApps = {
-      "Dashlane" = 517914548;
-      "Pages" = 409201541;
-    };
+    # masApps = {
+    #  "Dashlane" = 517914548;
+    #  "Pages" = 409201541;
+    # };
     onActivation = {
       cleanup = "zap";
-      autoUpdate = true;
-      upgrade = true;
+      # autoUpdate = true;
+      # upgrade = true;
     };
   };
 

@@ -46,6 +46,7 @@
     tree
     jetbrains-mono
     cargo
+    warp-terminal
   ];
 
 }

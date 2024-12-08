@@ -16,7 +16,7 @@
     # Where we get most of our Software. Giant mono repo with recipes
     # called derivations that say how to build software.
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
 
     # Controls system level software and settings including fonts
     nix-darwin.url = "github:LnL7/nix-darwin";

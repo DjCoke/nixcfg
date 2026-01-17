@@ -22,6 +22,9 @@
     sops
     cargo
     age
+    kubernetes-helm
+    helmfile
+    kustomize
   ];
 
   homebrew = {
@@ -77,7 +80,11 @@
 
 
   # Installing my favorite fonts system-wide
-  fonts.packages = [ (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" "Meslo" ]; }) ];
+  fonts.packages = with pkgs.nerd-fonts; [
+    jetbrains-mono
+    meslo-lg
+  ];
+
 
   # users.users.erwinvandeglind.home = "/Users/erwinvandeglind";
   # Auto upgrade nix package and the daemon service.
